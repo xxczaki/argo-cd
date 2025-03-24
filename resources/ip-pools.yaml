@@ -1,0 +1,11 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: "pi-hole-pool"
+spec:
+  blocks:
+    - cidr: "10.10.10.10/32"
+    - cidr: "fe80::c196:2a41:e1c0:79d7/64"
+  serviceSelector:
+    matchLabels:
+      app: pihole

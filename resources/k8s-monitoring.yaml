@@ -1,0 +1,90 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-k8s-monitoring
+  namespace: monitoring
+spec:
+  project: default
+  source:
+    chart: k8s-monitoring
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 2.0.20
+    helm:
+      valuesObject:
+        cluster:
+          name: "homelab"
+
+        destinations:
+          - name: Metrics
+            type: prometheus
+            url: https://prometheus-prod-39-prod-eu-north-0.grafana.net/api/prom/push
+            secret:
+              create: false
+            auth:
+              type: basic
+          - name: Logs
+            type: loki
+            url: https://logs-prod-025.grafana.net/loki/api/v1/push
+            secret:
+              create: false
+            auth:
+              type: basic
+          - name: Traces
+            type: otlp
+            url: https://tempo-prod-18-prod-eu-north-0.grafana.net:443
+            protocol: grpc
+            secret:
+              create: false
+            auth:
+              type: basic
+            metrics:
+              enabled: false
+            logs:
+              enabled: false
+            traces:
+              enabled: true
+
+        clusterMetrics:
+          enabled: true
+          node-exporter:
+            metricsTuning:
+              includeMetrics:
+                - node_hwmon_temp_celsius
+        prometheusOperatorObjects:
+          enabled: true
+        clusterEvents:
+          enabled: true
+        nodeLogs:
+          enabled: true
+        podLogs:
+          enabled: true
+        integrations:
+          alloy:
+            instances:
+              - name: alloy
+                labelSelectors:
+                  app.kubernetes.io/name:
+                    - alloy-metrics
+                    - alloy-singleton
+                    - alloy-logs
+        alloy-metrics:
+          enabled: true
+        alloy-singleton:
+          enabled: true
+        alloy-logs:
+          enabled: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        maxDuration: 3m0s
+        factor: 2
+    syncOptions:
+      - ServerSideApply=true

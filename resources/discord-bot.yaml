@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: discord-bot
+  namespace: discord-bot
+spec:
+  project: default
+  source:
+    chart: discord-bot
+    repoURL: https://xxczaki.github.io/charts/
+    targetRevision: 0.10.41
+    helm:
+      valuesObject:
+        secrets:
+          token:
+            name: secrets
+            key: token
+          sentryDsn:
+            name: secrets
+            key: sentryDsn
+
+        env:
+          clientId: "767113441718435850"
+          playlistsChannelId: "1197942961695101090"
+          botDebugChannelId: "1350945641781661846"
+          ownerUserId: "349213466743013376"
+
+        persistentVolumeClaim:
+          storageClass: longhorn
+
+        redis:
+          architecture: standalone
+          persistence:
+            storageClass: longhorn
+          auth:
+            enabled: false
+
+        resources:
+          requests:
+            memory: "96Mi"
+            cpu: "1m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: discord-bot
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false

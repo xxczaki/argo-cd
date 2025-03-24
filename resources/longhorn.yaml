@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: longhorn
+spec:
+  project: default
+  sources:
+    - chart: longhorn
+      repoURL: https://charts.longhorn.io/
+      targetRevision: 1.8.1
+      helm:
+        valuesObject:
+          defaultSettings:
+            allowCollectingLonghornUsageMetrics: false
+
+          preUpgradeChecker:
+            jobEnabled: false
+
+          persistence:
+            defaultClassReplicaCount: 1
+
+          ingress:
+            enabled: true
+            ingressClassName: tailscale
+            host: longhorn
+            hosts:
+              - longhorn
+            tls:
+              - hosts:
+                - longhorn
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: longhorn
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

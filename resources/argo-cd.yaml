@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-cd
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 7.8.13
+    helm:
+      valuesObject:
+        configs:
+          params:
+            server.insecure: true
+            application.namespaces: discord-bot, tailscale, pi-hole, monitoring, longhorn, kube-system
+          secret:
+            createSecret: false
+          cm:
+            timeout.reconciliation: 0s
+
+        server:
+          extraArgs:
+            - --enable-gzip
+          ingress:
+            enabled: true
+            ingressClassName: tailscale
+            annotations:
+              tailscale.com/funnel: "true"
+            hostname: argo-cd
+            hosts:
+              - argo-cd
+            extraTls:
+              - hosts:
+                - argo-cd
+            https: false
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argo-cd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
