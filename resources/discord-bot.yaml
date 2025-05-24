@@ -18,12 +18,16 @@ spec:
           sentryDsn:
             name: secrets
             key: sentryDsn
+          spotifyClientSecret:
+            name: secrets
+            key: spotifyClientSecret
 
         env:
           clientId: "767113441718435850"
           playlistsChannelId: "1197942961695101090"
           botDebugChannelId: "1350945641781661846"
           ownerUserId: "349213466743013376"
+          spotifyClientId: "cb115f7736cd45c9a7e8ae4555fa0f83"
 
         persistentVolumeClaim:
           storageClass: longhorn
