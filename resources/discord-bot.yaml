@@ -8,7 +8,7 @@ spec:
   source:
     chart: discord-bot
     repoURL: https://xxczaki.github.io/charts/
-    targetRevision: 0.16.336
+    targetRevision: 0.16.338
     helm:
       valuesObject:
         secrets:
