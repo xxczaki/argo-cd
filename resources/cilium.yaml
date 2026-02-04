@@ -26,7 +26,7 @@ spec:
           hostNamespaceOnly: true
         extraConfig:
           enable-ipv6-ndp: "true"
-          ipv6-mcast-device: "eno1"
+          ipv6-mcast-device: "eth0"
           ipv6-service-range: "2001:cafe:43::/112"
         operator:
           replicas: 1
