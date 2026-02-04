@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: pi-hole-l2
+spec:
+  interfaces:
+    - eth0
+  externalIPs: true
+  loadBalancerIPs: true
+  serviceSelector:
+    matchLabels:
+      app: pihole
