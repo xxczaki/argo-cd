@@ -56,12 +56,19 @@ spec:
         - hosts:
             - openclaws
   extraVolumes:
-    - name: gh-cli
+    - name: extra-bin
+      emptyDir: {}
+    - name: claude-code
       emptyDir: {}
   extraVolumeMounts:
-    - name: gh-cli
+    - name: extra-bin
       mountPath: /usr/local/bin/gh
       subPath: gh
+    - name: claude-code
+      mountPath: /opt/claude-code
+  env:
+    - name: PATH
+      value: "/opt/claude-code/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   initContainers:
     - name: install-gh
       image: alpine:3.21
@@ -70,8 +77,8 @@ spec:
         - |
           wget -qO /tmp/gh.tar.gz https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_linux_arm64.tar.gz &&
           tar -xzf /tmp/gh.tar.gz -C /tmp &&
-          cp /tmp/gh_2.67.0_linux_arm64/bin/gh /gh-cli/gh &&
-          chmod +x /gh-cli/gh
+          cp /tmp/gh_2.67.0_linux_arm64/bin/gh /extra-bin/gh &&
+          chmod +x /extra-bin/gh
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -81,8 +88,24 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       volumeMounts:
-        - name: gh-cli
-          mountPath: /gh-cli
+        - name: extra-bin
+          mountPath: /extra-bin
+    - name: install-claude-code
+      image: node:22-slim
+      command: ["/bin/sh", "-c"]
+      args:
+        - npm install --prefix /opt/claude-code @anthropic-ai/claude-code
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumeMounts:
+        - name: claude-code
+          mountPath: /opt/claude-code
   chromium:
     enabled: true
     resources:
