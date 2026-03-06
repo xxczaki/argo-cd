@@ -72,6 +72,14 @@ spec:
           tar -xzf /tmp/gh.tar.gz -C /tmp &&
           cp /tmp/gh_2.67.0_linux_arm64/bin/gh /gh-cli/gh &&
           chmod +x /gh-cli/gh
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
       volumeMounts:
         - name: gh-cli
           mountPath: /gh-cli
