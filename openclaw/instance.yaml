@@ -22,6 +22,12 @@ spec:
           dangerouslyDisableDeviceAuth: true
           allowedOrigins:
             - "https://openclaws.tail12a84.ts.net"
+      channels:
+        discord:
+          enabled: true
+          token: "${DISCORD_BOT_TOKEN}"
+          groupPolicy: allowlist
+          streaming: "off"
       agents:
         defaults:
           model:
