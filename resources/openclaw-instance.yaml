@@ -14,6 +14,7 @@ spec:
         trustedProxies:
           - "127.0.0.1"
         controlUi:
+          dangerouslyDisableDeviceAuth: true
           allowedOrigins:
             - "https://openclaw-agent.tail12a84.ts.net"
       agents:
