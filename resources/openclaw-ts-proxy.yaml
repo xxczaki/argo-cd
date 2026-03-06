@@ -42,6 +42,15 @@ spec:
       containers:
         - name: tailscale
           image: ghcr.io/tailscale/tailscale:latest
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
           env:
             - name: TS_HOSTNAME
               value: openclaw
