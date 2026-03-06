@@ -16,9 +16,9 @@ spec:
     mergeMode: merge
     raw:
       gateway:
-        mode: "local"
-        trustedProxies:
-          - "127.0.0.1"
+        mode: "remote"
+        allowedOrigins:
+          - "https://openclaw-agent.tail12a84.ts.net"
         controlUi:
           dangerouslyDisableDeviceAuth: true
       agents:
