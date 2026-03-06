@@ -16,6 +16,8 @@ spec:
     mergeMode: merge
     raw:
       gateway:
+        trustedProxies:
+          - "127.0.0.1"
         controlUi:
           dangerouslyDisableDeviceAuth: true
           allowedOrigins:
