@@ -7,16 +7,19 @@ spec:
   envFrom:
     - secretRef:
         name: openclaw-api-keys
+  gateway:
+    controlUiOrigins:
+      - "http://localhost:18789"
+      - "http://127.0.0.1:18789"
   config:
     mergeMode: merge
     raw:
       gateway:
+        mode: "local"
         trustedProxies:
           - "127.0.0.1"
         controlUi:
           dangerouslyDisableDeviceAuth: true
-          allowedOrigins:
-            - "https://openclaw-agent.tail12a84.ts.net"
       agents:
         defaults:
           model:
