@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openclaw
+  namespace: openclaw-system
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/xxczaki/argo-cd
+    targetRevision: main
+    path: openclaw
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: openclaw-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
