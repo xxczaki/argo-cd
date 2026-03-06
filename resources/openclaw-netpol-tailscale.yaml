@@ -16,5 +16,5 @@ spec:
             matchLabels:
               kubernetes.io/metadata.name: tailscale
       ports:
-        - port: 18790
+        - port: 18789
           protocol: TCP
