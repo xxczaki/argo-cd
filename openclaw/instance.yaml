@@ -55,6 +55,26 @@ spec:
       tls:
         - hosts:
             - openclaws
+  extraVolumes:
+    - name: gh-cli
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: gh-cli
+      mountPath: /usr/local/bin/gh
+      subPath: gh
+  initContainers:
+    - name: install-gh
+      image: alpine:3.21
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          wget -qO /tmp/gh.tar.gz https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_linux_arm64.tar.gz &&
+          tar -xzf /tmp/gh.tar.gz -C /tmp &&
+          cp /tmp/gh_2.67.0_linux_arm64/bin/gh /gh-cli/gh &&
+          chmod +x /gh-cli/gh
+      volumeMounts:
+        - name: gh-cli
+          mountPath: /gh-cli
   chromium:
     enabled: true
     resources:
