@@ -33,6 +33,10 @@ spec:
   selfConfigure:
     enabled: true
     allowedActions: [skills, config, envVars, workspaceFiles]
+  security:
+    networkPolicy:
+      allowedIngressNamespaces:
+        - tailscale
   networking:
     ingress:
       enabled: true
