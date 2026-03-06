@@ -6,7 +6,8 @@ metadata:
 spec:
   ingressClassName: tailscale
   rules:
-    - http:
+    - host: openclaw
+      http:
         paths:
           - path: /
             pathType: Prefix

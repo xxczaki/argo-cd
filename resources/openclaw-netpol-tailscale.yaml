@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: openclaw-allow-tailscale
+  namespace: openclaw-system
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: openclaw
+      app.kubernetes.io/name: openclaw
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tailscale
+      ports:
+        - port: 18790
+          protocol: TCP
