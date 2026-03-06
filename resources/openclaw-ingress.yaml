@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: tailscale
   rules:
-    - host: openclaw-agent
+    - host: openclaw
       http:
         paths:
           - path: /
@@ -18,4 +18,4 @@ spec:
                   number: 18789
   tls:
     - hosts:
-        - openclaw-agent
+        - openclaw
