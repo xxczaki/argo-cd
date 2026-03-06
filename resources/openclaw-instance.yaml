@@ -9,7 +9,7 @@ spec:
         name: openclaw-api-keys
   gateway:
     controlUiOrigins:
-      - "https://openclaw.tail12a84.ts.net"
+      - "https://openclaw-bot.tail12a84.ts.net"
       - "http://localhost:18789"
       - "http://127.0.0.1:18789"
   config:
@@ -19,7 +19,7 @@ spec:
         controlUi:
           dangerouslyDisableDeviceAuth: true
           allowedOrigins:
-            - "https://openclaw.tail12a84.ts.net"
+            - "https://openclaw-bot.tail12a84.ts.net"
       agents:
         defaults:
           model:
@@ -31,7 +31,7 @@ spec:
   tailscale:
     enabled: true
     mode: serve
-    hostname: openclaw
+    hostname: openclaw-bot
     authKeySecretRef:
       name: openclaw-ts-auth
   chromium:
