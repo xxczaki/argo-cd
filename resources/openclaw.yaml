@@ -12,20 +12,9 @@ spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: openclaw-system
-  ignoreDifferences:
-    - group: networking.k8s.io
-      kind: Ingress
-      jsonPointers:
-        - /metadata/finalizers
-        - /status
-    - group: openclaw.rocks
-      kind: OpenClawInstance
-      jsonPointers:
-        - /status
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - ServerSideApply=true
-      - RespectIgnoreDifferences=true

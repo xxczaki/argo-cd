@@ -33,6 +33,18 @@ spec:
   selfConfigure:
     enabled: true
     allowedActions: [skills, config, envVars, workspaceFiles]
+  networking:
+    ingress:
+      enabled: true
+      className: tailscale
+      hosts:
+        - host: ""
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - openclaws
   chromium:
     enabled: true
     resources:
