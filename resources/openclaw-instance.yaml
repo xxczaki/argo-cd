@@ -10,6 +10,10 @@ spec:
   config:
     mergeMode: merge
     raw:
+      gateway:
+        controlUi:
+          allowedOrigins:
+            - "https://openclaw.tail12a84.ts.net"
       agents:
         defaults:
           model:
