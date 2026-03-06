@@ -11,6 +11,8 @@ spec:
     mergeMode: merge
     raw:
       gateway:
+        trustedProxies:
+          - "127.0.0.1"
         controlUi:
           allowedOrigins:
             - "https://openclaw.tail12a84.ts.net"
