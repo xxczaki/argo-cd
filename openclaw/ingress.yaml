@@ -17,4 +17,4 @@ spec:
                   number: 18789
   tls:
     - hosts:
-        - openclaw
+        - openclaws
