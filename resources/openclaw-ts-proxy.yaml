@@ -60,6 +60,8 @@ spec:
               value: /config/serve-config.json
             - name: TS_USERSPACE
               value: "true"
+            - name: TS_KUBE_SECRET
+              value: ""
           envFrom:
             - secretRef:
                 name: openclaw-ts-authkey
