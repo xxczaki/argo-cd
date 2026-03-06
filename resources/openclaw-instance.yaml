@@ -28,6 +28,12 @@ spec:
     persistence:
       enabled: true
       size: 10Gi
+  tailscale:
+    enabled: true
+    mode: serve
+    hostname: openclaw
+    authKeySecretRef:
+      name: openclaw-ts-auth
   chromium:
     enabled: true
     resources:
