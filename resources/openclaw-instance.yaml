@@ -15,7 +15,7 @@ spec:
           - "127.0.0.1"
         controlUi:
           allowedOrigins:
-            - "https://openclaw.tail12a84.ts.net"
+            - "https://openclaw-agent.tail12a84.ts.net"
       agents:
         defaults:
           model:
