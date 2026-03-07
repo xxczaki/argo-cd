@@ -83,7 +83,7 @@ spec:
       args:
         - |
           const fs = require('fs');
-          const f = '/data/.openclaw/openclaw.json';
+          const f = '/data/openclaw.json';
           try {
             const cfg = JSON.parse(fs.readFileSync(f, 'utf8'));
             if (cfg.security) {
