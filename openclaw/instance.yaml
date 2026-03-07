@@ -39,12 +39,13 @@ spec:
   selfConfigure:
     enabled: true
     allowedActions: [skills, config, envVars, workspaceFiles]
-  monitoring:
-    enabled: true
-    serviceMonitor:
+  observability:
+    metrics:
       enabled: true
-      labels:
-        prometheus: kube-prometheus
+      serviceMonitor:
+        enabled: true
+        labels:
+          prometheus: kube-prometheus
   security:
     networkPolicy:
       allowedIngressNamespaces:
