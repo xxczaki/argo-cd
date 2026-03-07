@@ -44,15 +44,15 @@ spec:
           master:
             resources:
               requests:
-                memory: "48Mi"   # Actual usage: ~18Mi per replica
-                cpu: "25m"       # Actual usage: ~14m per replica
+                memory: "48Mi"
+                cpu: "25m"
               limits:
                 memory: "128Mi"
                 cpu: "100m"
 
         resources:
           requests:
-            memory: "128Mi"  # Actual usage: ~158Mi steady
+            memory: "128Mi"
             cpu: "50m"
           limits:
             memory: "1024Mi"
