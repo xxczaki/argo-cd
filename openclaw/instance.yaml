@@ -49,6 +49,14 @@ spec:
     networkPolicy:
       allowedIngressNamespaces:
         - tailscale
+      additionalEgress:
+        - to:
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: tailscale
+          ports:
+            - port: 22
+              protocol: TCP
   networking:
     ingress:
       enabled: true
