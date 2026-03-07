@@ -26,7 +26,7 @@ spec:
           enabled: true
           token: "${DISCORD_BOT_TOKEN}"
           groupPolicy: allowlist
-          streaming: "partial"
+          streaming: "block"
       agents:
         defaults:
           model:
