@@ -77,6 +77,30 @@ spec:
     - name: PATH
       value: "/opt/claude-code/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   initContainers:
+    - name: fix-config
+      image: alpine:3.21
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          apk add --no-cache jq &&
+          F=/data/.openclaw/openclaw.json &&
+          if [ -f "$F" ] && jq -e '.security' "$F" >/dev/null 2>&1; then
+            jq 'del(.security)' "$F" > "$F.tmp" && mv "$F.tmp" "$F"
+            echo "Removed invalid security key from config"
+          else
+            echo "Config OK, no fix needed"
+          fi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumeMounts:
+        - name: data
+          mountPath: /data
     - name: install-gh
       image: alpine:3.21
       command: ["/bin/sh", "-c"]
