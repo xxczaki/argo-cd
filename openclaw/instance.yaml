@@ -35,6 +35,12 @@ spec:
     persistence:
       enabled: true
       size: 10Gi
+  autoUpdate:
+    enabled: true
+    checkInterval: "24h"
+    backupBeforeUpdate: false
+    rollbackOnFailure: true
+    healthCheckTimeout: "10m"
   selfConfigure:
     enabled: false
   observability:
