@@ -100,7 +100,7 @@ spec:
       image: node:24-slim
       command: ["/bin/sh", "-c"]
       args:
-        - npm install --prefix /opt/claude-code @anthropic-ai/claude-code
+        - npm install --prefix /opt/claude-code @anthropic-ai/claude-code@2.1.71
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
