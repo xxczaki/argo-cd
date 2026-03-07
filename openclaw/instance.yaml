@@ -78,18 +78,22 @@ spec:
       value: "/opt/claude-code/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   initContainers:
     - name: fix-config
-      image: alpine:3.21
-      command: ["/bin/sh", "-c"]
+      image: node:24-slim
+      command: ["node", "-e"]
       args:
         - |
-          apk add --no-cache jq &&
-          F=/data/.openclaw/openclaw.json &&
-          if [ -f "$F" ] && jq -e '.security' "$F" >/dev/null 2>&1; then
-            jq 'del(.security)' "$F" > "$F.tmp" && mv "$F.tmp" "$F"
-            echo "Removed invalid security key from config"
-          else
-            echo "Config OK, no fix needed"
-          fi
+          const fs = require('fs');
+          const f = '/data/.openclaw/openclaw.json';
+          try {
+            const cfg = JSON.parse(fs.readFileSync(f, 'utf8'));
+            if (cfg.security) {
+              delete cfg.security;
+              fs.writeFileSync(f, JSON.stringify(cfg, null, 2));
+              console.log('Removed invalid security key from config');
+            } else {
+              console.log('Config OK, no fix needed');
+            }
+          } catch(e) { console.log('No config file or parse error:', e.message); }
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
