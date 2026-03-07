@@ -37,8 +37,7 @@ spec:
       enabled: true
       size: 10Gi
   selfConfigure:
-    enabled: true
-    allowedActions: [skills, config, envVars, workspaceFiles]
+    enabled: false
   observability:
     metrics:
       enabled: true
