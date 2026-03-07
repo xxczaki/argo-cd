@@ -91,6 +91,8 @@ spec:
   env:
     - name: PATH
       value: "/opt/claude-code/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    - name: CLAUDE_CONFIG_DIR
+      value: "/home/openclaw/.claude"
   initContainers:
     - name: install-gh
       image: alpine:3.21
