@@ -18,6 +18,11 @@ spec:
       name: raspberrypi
       jsonPointers:
         - /spec/externalName
+    - group: ""
+      kind: Service
+      name: homeassistant
+      jsonPointers:
+        - /spec/externalName
   syncPolicy:
     automated:
       prune: true
