@@ -112,7 +112,7 @@ spec:
             memory: 64Mi
             cpu: 100m
           limits:
-            memory: 256Mi
+            memory: 256Mi  # Monitor: OOMKilled on 2026-02-27 (spike to ~240Mi). Increase if recurs.
             cpu: 200m
   destination:
     server: "https://kubernetes.default.svc"
