@@ -12,6 +12,12 @@ spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: openclaw-system
+  ignoreDifferences:
+    - group: ""
+      kind: Service
+      name: raspberrypi
+      jsonPointers:
+        - /spec/externalName
   syncPolicy:
     automated:
       prune: true
