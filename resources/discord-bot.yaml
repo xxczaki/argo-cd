@@ -41,10 +41,18 @@ spec:
             storageClass: longhorn
           auth:
             enabled: false
+          master:
+            resources:
+              requests:
+                memory: "48Mi"
+                cpu: "25m"
+              limits:
+                memory: "128Mi"
+                cpu: "100m"
 
         resources:
           requests:
-            memory: "256Mi"
+            memory: "128Mi"
             cpu: "50m"
           limits:
             memory: "1024Mi"
