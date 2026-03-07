@@ -76,6 +76,10 @@ spec:
       emptyDir: {}
     - name: home
       emptyDir: {}
+    - name: ha-ssh-key
+      secret:
+        secretName: openclaw-ha-ssh-key
+        defaultMode: 0600
   extraVolumeMounts:
     - name: extra-bin
       mountPath: /usr/local/bin/gh
@@ -84,6 +88,9 @@ spec:
       mountPath: /opt/claude-code
     - name: home
       mountPath: /home/openclaw
+    - name: ha-ssh-key
+      mountPath: /etc/ssh/openclaw
+      readOnly: true
   env:
     - name: PATH
       value: "/opt/claude-code/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
