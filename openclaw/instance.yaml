@@ -19,7 +19,6 @@ spec:
         trustedProxies:
           - "10.42.0.0/24"
         controlUi:
-          dangerouslyDisableDeviceAuth: true
           allowedOrigins:
             - "https://openclaws.tail12a84.ts.net"
       channels:
