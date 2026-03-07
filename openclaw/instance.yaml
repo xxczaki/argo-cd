@@ -74,12 +74,16 @@ spec:
       emptyDir: {}
     - name: claude-code
       emptyDir: {}
+    - name: claude-code-home
+      emptyDir: {}
   extraVolumeMounts:
     - name: extra-bin
       mountPath: /usr/local/bin/gh
       subPath: gh
     - name: claude-code
       mountPath: /opt/claude-code
+    - name: claude-code-home
+      mountPath: /home/openclaw/.claude
   env:
     - name: PATH
       value: "/opt/claude-code/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
