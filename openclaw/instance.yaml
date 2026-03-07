@@ -77,34 +77,6 @@ spec:
     - name: PATH
       value: "/opt/claude-code/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   initContainers:
-    - name: fix-config
-      image: node:24-slim
-      command: ["node", "-e"]
-      args:
-        - |
-          const fs = require('fs');
-          const f = '/data/openclaw.json';
-          try {
-            const cfg = JSON.parse(fs.readFileSync(f, 'utf8'));
-            if (cfg.security) {
-              delete cfg.security;
-              fs.writeFileSync(f, JSON.stringify(cfg, null, 2));
-              console.log('Removed invalid security key from config');
-            } else {
-              console.log('Config OK, no fix needed');
-            }
-          } catch(e) { console.log('No config file or parse error:', e.message); }
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop: ["ALL"]
-        runAsNonRoot: true
-        runAsUser: 1000
-        seccompProfile:
-          type: RuntimeDefault
-      volumeMounts:
-        - name: data
-          mountPath: /data
     - name: install-gh
       image: alpine:3.21
       command: ["/bin/sh", "-c"]
