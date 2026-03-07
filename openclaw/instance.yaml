@@ -97,10 +97,10 @@ spec:
         - name: extra-bin
           mountPath: /extra-bin
     - name: install-claude-code
-      image: node:22-slim
+      image: node:24-slim
       command: ["/bin/sh", "-c"]
       args:
-        - npm install --prefix /opt/claude-code @anthropic-ai/claude-code@2.1.71
+        - npm install --prefix /opt/claude-code @anthropic-ai/claude-code
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
