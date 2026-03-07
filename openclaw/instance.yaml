@@ -27,7 +27,7 @@ spec:
           enabled: true
           token: "${DISCORD_BOT_TOKEN}"
           groupPolicy: allowlist
-          streaming: "off"
+          streaming: "partial"
       agents:
         defaults:
           model:
@@ -39,6 +39,12 @@ spec:
   selfConfigure:
     enabled: true
     allowedActions: [skills, config, envVars, workspaceFiles]
+  monitoring:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      labels:
+        prometheus: kube-prometheus
   security:
     networkPolicy:
       allowedIngressNamespaces:
@@ -75,9 +81,9 @@ spec:
       command: ["/bin/sh", "-c"]
       args:
         - |
-          wget -qO /tmp/gh.tar.gz https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_linux_arm64.tar.gz &&
+          wget -qO /tmp/gh.tar.gz https://github.com/cli/cli/releases/download/v2.87.3/gh_2.87.3_linux_arm64.tar.gz &&
           tar -xzf /tmp/gh.tar.gz -C /tmp &&
-          cp /tmp/gh_2.67.0_linux_arm64/bin/gh /extra-bin/gh &&
+          cp /tmp/gh_2.87.3_linux_arm64/bin/gh /extra-bin/gh &&
           chmod +x /extra-bin/gh
       securityContext:
         allowPrivilegeEscalation: false
@@ -94,7 +100,7 @@ spec:
       image: node:22-slim
       command: ["/bin/sh", "-c"]
       args:
-        - npm install --prefix /opt/claude-code @anthropic-ai/claude-code
+        - npm install --prefix /opt/claude-code @anthropic-ai/claude-code@2.1.71
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
