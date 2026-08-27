@@ -8,7 +8,7 @@ spec:
   source:
     chart: wicek
     repoURL: https://xxczaki.github.io/charts/
-    targetRevision: 0.1.220
+    targetRevision: 0.1.221
     helm:
       valuesObject:
         secrets:
