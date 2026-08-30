@@ -8,9 +8,14 @@ spec:
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 9.7.1
+    targetRevision: 10.4.2
     helm:
       valuesObject:
+        global:
+          networkPolicy:
+            # Keep the Argo CD component boundary explicit.
+            create: true
+
         configs:
           params:
             server.insecure: true
