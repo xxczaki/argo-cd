@@ -11,6 +11,10 @@ metadata:
   namespace: system-upgrade
 rules:
   - apiGroups: ["apps"]
+    resources: ["deployments"]
+    resourceNames: ["system-upgrade-controller"]
+    verbs: ["get"]
+  - apiGroups: ["apps"]
     resources: ["deployments/scale"]
     resourceNames: ["system-upgrade-controller"]
     verbs: ["get", "patch", "update"]
