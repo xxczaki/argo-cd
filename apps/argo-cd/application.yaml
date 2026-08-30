@@ -11,6 +11,11 @@ spec:
     targetRevision: 10.4.2
     helm:
       valuesObject:
+        global:
+          networkPolicy:
+            # Keep the Argo CD component boundary explicit.
+            create: true
+
         configs:
           params:
             server.insecure: true
