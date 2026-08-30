@@ -92,6 +92,7 @@ spec:
               includeMetrics:
                 - node_hwmon_temp_celsius
         integrations:
+          collector: alloy-metrics
           alloy:
             instances:
               - name: alloy
