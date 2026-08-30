@@ -24,6 +24,9 @@ spec:
           openAiApiKey:
             name: secrets
             key: openAiApiKey
+          mistralApiKey:
+            name: secrets
+            key: mistralApiKey
 
         env:
           clientId: "767113441718435850"
